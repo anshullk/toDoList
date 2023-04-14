@@ -2,7 +2,7 @@
   "name": "17.todolist-v2",
   "version": "1.0.0",
   "description": "Upgrade to the todolist application.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
