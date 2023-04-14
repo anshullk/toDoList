@@ -1,0 +1,24 @@
+//1--> Require mongoose
+// 2--> Connecting to mongoose database with the name of the database to be created
+//127.0.0.1:27017/todolistDB');
+// 3--> Creating a new schema which will define what properties our document can have within a particular collection,
+// and also, define some custom validations.  
+//4--> Creating a mongoose model based on this schema as the schema only define the structure of a document.
+//We require a mongoose model, wrapped around that schema to perform any CRUD operation on any collection in a database.
+// mongoose.model(<singularcollectionName>,<schemaName>)
+//5--> Defining/creating items in  collection inside  todoListDB database as we need to get rid of the 
+//array storing our default items.
+//"We're creating a new document from our Model"
+//"Now , this is again a new document in the same collection using our Model"
+//"This is again a different document inside that collection"
+//6-->Insert these newly created documents inside items collection
+//Creating a new schema "listSchema" , a model and documents
+//name of the field is "items" which is going to be an array which contains elements based on itemsSchema.
+//collection down in the express route parameter.
+//7-->console log the "Items" collection in our database.
+// When it's logged, we can see that the "result" is an array
+// and will be triggered if and only if a get request to "/" path is made 
+// console.log(result);
+//9--> If condition so that insertMany() does not save our items each time(multiple times) 
+//we make a "get" request to this route.
+//8--> Save the input to the database and redirect and render back to the user whatever he wanted to save!
