@@ -1,8 +1,10 @@
 // ***** *** Require Packages: *** *****
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const _ = require("lodash");
+
 
 
 const app = express();
@@ -12,8 +14,26 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
+//a port number to tell where our app will be running on
+//setting an environment variable to tell the web server what port to listen on
+//PORT=process.env.PORT means to listen on whatever is in the environment variabe PORT
+//PORT=3000 means to listen locally on PORT 3000
+//Later we can pass it to app.listen() or app.set("port",).
+const PORT= process.env.PORT || 3000;
+
+//to avoid the warning inside our console
+mongoose.set("strictQuery",false);
 // *** Create a New Database inside MongoDB via Connecting mongoose: ***
-mongoose.connect("mongodb+srv://anshulkashyaph:OgcFUfdGu23Owxt4@cluster0.t4nwmp2.mongodb.net/todolistDB");
+// mongoose.connect("mongodb+srv://anshulkashyaph:OgcFUfdGu23Owxt4@cluster0.t4nwmp2.mongodb.net/todolistDB");
+const connectDB= async ()=>{
+    try {
+        const connect= mongoose.connect(process.env.MONGO_URI);
+        console.log("Successfully connected to mongoDB");
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
 // mongoose.connect("mongodb://127.0.0.1:27017/todolistDB", {useNewUrlParser: true}); // ==> use this if deprect a warning 
 
 // *** Create a Schema: ***
@@ -184,6 +204,10 @@ app.get("/about", function (req, res) {
     res.render("about");
 });
 
-app.listen(3000, function () {
-    console.log("Server started on port 3000");
-});
+connectDB().then(function(){
+
+    app.listen(PORT, function () {
+        console.log(`Server started listening on ${PORT}`);
+    });
+
+}) 
